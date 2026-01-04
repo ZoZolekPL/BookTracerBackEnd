@@ -1,10 +1,11 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
+from booktracer.bookshelf.models.books import Book
 from booktracer.users.models import Users
 
 
-class Comments(models.Model):
+class BookComments(models.Model):
     author = models.ForeignKey(Users,
                                on_delete=models.CASCADE,
                                related_name="comment")
@@ -14,4 +15,5 @@ class Comments(models.Model):
         MinValueValidator(0),
         MaxValueValidator(5)
         ] )
-
+    book = models.ForeignKey(Book,
+                             on_delete=models.CASCADE)
